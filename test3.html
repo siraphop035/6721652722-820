@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .button{
+            background-color: lightgreen;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .button:hover{
+            background-color: green;
+            color: white;
+        }
+        .button:active{
+            background-color: rgb(41, 62, 255);
+        }
+        input:focus {
+            background-color: lightyellow;
+        }
+        .container .item:first-child {
+            background-color: lightseagreen;
+        }
+        .container .item:last-child{
+            background-color: rgb(63, 214, 207);
+        }
+        .container .item:nth-child(2){
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <button class="button">Normal Button</button><br><br>
+    <input type="text" placeholder="Enter text here">
+    <div class="container">
+        <div class="item">
+            Item 1
+        </div>
+        <div class="item">
+            Item 2
+        </div>
+        <div class="item">  
+            Item 3
+        </div>
+    </div>
+</body>
+</html>
