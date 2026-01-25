@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> hello </title>
+</head>
+<style>
+    button,
+    input {
+        color: rgb(0, 0, 0);
+        padding: 10px;
+    }
+
+    div {
+        font-size: 60px;
+    }
+
+    .inputNAME1 {}
+</style>
+
+<body>
+    ชื่อ: <input type="text" name="fname" onkeyup="changeFname()">
+    <button onmouseover="mouseOver()" onclick="Click()" onmousedown="mouseDown()">
+        Name
+    </button>
+    <div id="display"></div>
+
+    <div id="hi">Hi A</div>
+    
+
+    <h1>Check</h1>
+    <div id="content"></div>
+    <input type="checkbox" name="hobby" value="reading">อ่านหนังสือ
+    <input type="checkbox" name="hobby" value="swimming">ว่ายน้ำ
+    <input type="checkbox" name="hobby" value="gaming">เล่นเกม
+    <button onclick="submitHobby()">Submit</button>
+
+
+    <script>
+        function submitHobby() {
+            let hobbies = document.querySelectorAll('input[name="hobby"]')
+            let contentHTML = '<ul>';
+
+            for ( let i = 0; i < hobbies.length ; i++ ) {
+                if (hobbies[i].checked) {
+                    contentHTML += '<li>' + hobbies[i].value + '</li>'
+                }
+            }
+            contentHTML += '</ul>';
+            let contentDiv = document.getElementById('content')
+            contentDiv.innerHTML = contentHTML;
+        }
+        
+
+
+
+
+
+        let inputName1 = document.getElementById("display")
+
+
+        let HICONT = document.getElementById("hi");
+        HICONT.innerHTML = "HI <b> B </b> + <b>C</b>"
+
+        console.log(HICONT.textContent);
+        console.log(HICONT.innerText);
+        console.log(HICONT.innerHTML);
+
+
+
+        function mouseDown() {
+            console.log("Event mouse down");
+        }
+
+        function mouseOver() {
+            console.log("Event mouse over");
+
+        }
+        function Click() {
+            console.log("CLick");
+        }
+
+        function changeFname() {
+
+            console.log("Key event");
+            let inputElement = document.querySelector('input[name="fname"]');
+            inputName1.innerText = inputElement.value,"<b>";
+
+            console.log(inputElement.value)
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>
