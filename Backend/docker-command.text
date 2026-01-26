@@ -1,0 +1,34 @@
+//show all containers
+docker ps --all
+
+//show running containers
+docker ps
+
+docker run hello-world
+docker run busybox ls
+
+docker create busybox
+docker pull 
+
+docker stop containnersID
+docker start 
+docker rm
+// remove all
+docker system prune
+
+//foreground mode
+//run nginx server
+docker run nginx
+//run with port 
+docker run -p 80:80 nginx
+docker run -p 9000:80 nginx
+//deta mode
+docker run -d -p 9001:80 nginx
+
+
+//เข้า containers
+docker exec -it <id> sh
+docker exec -it <id> bash
+
+//cat file inside ดูไฟล์
+cat filename.txt
