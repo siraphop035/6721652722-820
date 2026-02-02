@@ -1,24 +1,13 @@
-let numberInput = document.getElementById('number-input');
-let runButton = document.getElementById('run-button');
-let output = document.getElementById('output'); 
+const http = require('http');
+const host = '0.0.0.0';
+const port = 8000;
 
-function runtime() {
-    let number = Number(numberInput.value);
-    let outputHtml = ''; 
-
-    if (number=== 0){
-        output.innerHTML ='000'
-        return;
-
-    }
-
-    for (let i = 1; i <= 12; i++) {
-        outputHtml += '<p>';
-        outputHtml += number + ' x ' + i + ' = ' + (number * i);
-        outputHtml += '</p>';
-    }
-
-    output.innerHTML = outputHtml;
+const requireListener = function(req, res){
+    res.writeHead(200);
+    res.end('My server')
 }
 
-runButton.addEventListener('click', runtime);
+const server = http.createServer(requireListener);
+server.listen(port,host, () => {
+    console.log(`Server is running at http://${host}:${port}`)
+})
