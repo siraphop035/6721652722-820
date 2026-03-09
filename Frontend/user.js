@@ -22,6 +22,7 @@ window.onload = async () => {
             const id = event.target.dataset.id;
             try {
                 await axios.delete(`${Base_URL}/users/${id}`);
+                loadData();
             }catch (error) {
                 console.log('deleting error', error);
             }
