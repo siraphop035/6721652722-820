@@ -20,6 +20,8 @@
     font-family: 'Kanit', sans-serif;
 }
 
+
+
 body {
     background-color: #f5f7fa;
     margin: 0;
@@ -76,6 +78,25 @@ textarea {
     margin-top: 5px;
 }
 
+.message {
+    background-color: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: none;
+}
+
+.message.success {
+    background-color: #4CAF50;
+    color: white;
+    display: block
+}
+.message.danger {
+    background-color: #f44336;
+    color: white;
+    display: block
+}
+
 .button {
     width: 100%;
     padding: 10px;
@@ -91,20 +112,4 @@ textarea {
 
 .button:hover {
     background-color: #45a049;
-}
-
-.message {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.message.success {
-    color: #ffffff;
-    background-color: #45a049;
-}
-
-.message.error {
-    color: #ffffff;
-    background-color: #ff0000;
 }
