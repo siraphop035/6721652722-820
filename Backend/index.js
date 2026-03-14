@@ -2,8 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2/promise');
 const app = express();
-const port = 8000;
 const cors = require('cors');
+const port = 8000;
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -13,36 +13,20 @@ let counter = 1;
 let conn = null
 
 const initMySQL = async () => {
-    try {
-        conn = await mysql.createConnection({
-            host: 'localhost',
-            user: 'root',
-            password: 'root',
-            database: 'webdb',
-            port: 8820
-        });
-        console.log('Connected to MySQL');
-
-        // ensure the users table exists (id autoincrement primary key)
-        const createTableSql = `
-            CREATE TABLE IF NOT EXISTS users (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                firstName VARCHAR(255),
-                lastName VARCHAR(255),
-                age INT,
-                gender VARCHAR(50),
-                description TEXT,
-                interests TEXT
-            ) ENGINE=InnoDB;
-        `;
-        await conn.query(createTableSql);
-        console.log('Ensured users table exists');
-    } catch (err) {
-        console.error('MySQL connection error or table creation failed:', err.message);
-        // Exit the process since the database is required
-        process.exit(1);
-    }
+    conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'root',
+        database: 'webdb',
+        port: 8820
+    });
 }
+
+//path = GET /users สำหรับด get ข้อมูล users ทั้งหมด
+app.get('/users', async (req, res) => {
+    const results = await conn.query('SELECT * FROM users')
+    res.json(results[0]);
+});
 
 const validateData = (userData) => {
     let errors = [];
@@ -67,32 +51,29 @@ const validateData = (userData) => {
     return errors;
 }
 
-//path = GET /users สำหรับด get ข้อมูล users ทั้งหมด
-app.get('/users', async (req, res) => {
-    const results = await conn.query('SELECT * FROM users')
-    res.json(results[0]);
-});
-
 //path = POST /users สำหรับเพิ่ม user ใหม่
 app.post('/users', async (req, res) => {
     try {
         let user = req.body;
         const errors = validateData(user);
         if (errors.length > 0) {
-            throw { message: 'กรุณากรอกข้อมูลให้ครบถ้วน', 
-                errors: errors };
+            throw {
+                message: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+                errors: errors
+            }
         }
         const results = await conn.query('INSERT INTO users SET ?', user)
         res.json({
-        
             message: 'User created successfully',
             data: results[0]
         })
     } catch (error) {
-        console.error('Error creating user:', error);
+        const errorMessage = error.message || 'Error creating user';
+        const errors = error.errors || [];
+        console.error('Error creating user:', error.message);
         res.status(500).json({
-            message: 'Error creating user',
-            error: error.message
+            message: errorMessage,
+            errors: errors
         });
     }
 });
@@ -168,6 +149,4 @@ app.delete('/users/:id', async (req, res) => {
 app.listen(port, async () => {
     await initMySQL();
     console.log(`Server is running on port ${port}`);
-}).on('error', err => {
-    console.error('Server error:', err);
 });
