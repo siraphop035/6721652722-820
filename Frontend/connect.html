@@ -8,15 +8,12 @@
 <body>
     <script>
         fetch('http://localhost:8000/users')
-            .then(response => {
-                return response.json();
-            })
-            .then((responseData) => {
-                console.log('Response: ', responseData);
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
+        .then(response => {
+            return response.json()
+        })
+        .then((responseData) => {
+            console.log('Response:', responseData)
+        })
     </script>
 </body>
 </html>
